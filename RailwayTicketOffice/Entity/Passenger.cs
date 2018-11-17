@@ -1,18 +1,15 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RailwayTicketOffice.Entity
 {
-    public class Passenger
+    [Table("passenger")]
+    public class Passenger : Entity
     {
-        public int PassengerID { get; set; }
-        
-        [Required]
-        public string FirstName { get; set; }
-        
-        [Required]
-        public string LastName { get; set; }
-        
-        [Required]
-        public string PassportData { get; set; }
+        [Required] public string FirstName { get; set; }
+
+        [Required] public string LastName { get; set; }
+
+        [Required] public string PassportData { get; set; }
     }
 }

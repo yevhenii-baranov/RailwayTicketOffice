@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RailwayTicketOffice.Entity
 {
-    public class Carriage
+    [Table("carriage")]
+    public class Carriage : Entity
     {
         public enum CarriageType
         {
@@ -14,12 +16,8 @@ namespace RailwayTicketOffice.Entity
             Deluxe
         }
 
-        public int CarriageID { get; set; }
-        
-        [Required]
-        public CarriageType Type { get; set; }
-        
-        [Required]
-        public List<CarriageSeat> Seats = new List<CarriageSeat>();
+        [Required] public CarriageType Type { get; set; }
+
+        [Required] public List<CarriageSeat> Seats = new List<CarriageSeat>();
     }
 }

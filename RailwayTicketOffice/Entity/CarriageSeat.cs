@@ -1,15 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RailwayTicketOffice.Entity
 {
-    public class CarriageSeat
+    [Table("seat")]
+    public class CarriageSeat : Entity
     {
-        public int CarriageSeatID { get; set; }
-        
-        [Required]
-        public int NumberInCarriage { get; set; }
-        
-        [Required]
-        public bool Ordered { get; set; }
+        [Required] public int NumberInCarriage { get; set; }
+
+        [Required] public bool Ordered { get; set; }
     }
 }

@@ -3,18 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.InteropServices.ComTypes;
 
 namespace RailwayTicketOffice.Entity
-{    
+{
     [Table("station")]
-    public class TrainStation
+    public class TrainStation : Entity
     {
-        public int TrainStationId { get; set; }
-        
-        [Required]
-        public string Name { get; set; }
+        [Required] public string Name { get; set; }
 
         public TrainStation(int id, string name)
         {
-            this.TrainStationId = id;
+            this.ID = id;
             this.Name = name;
         }
 
