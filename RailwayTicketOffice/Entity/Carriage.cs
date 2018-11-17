@@ -7,17 +7,17 @@ namespace RailwayTicketOffice.Entity
     [Table("carriage")]
     public class Carriage : Entity
     {
-        public enum CarriageType
-        {
-            Sitting,
-            Common,
-            Couchette,
-            Compartment,
-            Deluxe
-        }
-
-        [Required] public CarriageType Type { get; set; }
+        [Required] public CarriageType CarriageType { get; set; }
 
         [Required] public List<CarriageSeat> Seats = new List<CarriageSeat>();
+    }
+    
+    public enum CarriageType: int
+    {
+        Sitting = 1,
+        Common = 2,
+        Couchette = 3,
+        Compartment = 4,
+        Deluxe = 5
     }
 }
