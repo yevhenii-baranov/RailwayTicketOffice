@@ -11,7 +11,14 @@ namespace RailwayTicketOffice.DbContext
             optionsBuilder.UseMySQL("server=localhost;database=railway;user=root;password=Philosophy2018");
             Database.EnsureCreated();
         }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Passenger>().HasIndex(passenger => passenger.PassportData).IsUnique();
+            
+            
+        }
+
         public DbSet<TrainStation> Stations { get; set; }
         public DbSet<Train> Trains { get; set; }
         public DbSet<Carriage> Carriages { get; set; }
