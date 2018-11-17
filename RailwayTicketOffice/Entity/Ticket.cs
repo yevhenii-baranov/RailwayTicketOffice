@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace RailwayTicketOffice.Entity
 {
     public class Ticket
@@ -9,11 +11,21 @@ namespace RailwayTicketOffice.Entity
             Child
         }
 
-        public int TicketId { get; set; }
-        public Customer Customer { get; set; }
+        public int TicketID { get; set; }
+        
+        [Required]
+        public Passenger Passenger { get; set; }
+        
+        [Required]
         public Train Train { get; set; }
+        
+        [Required]
         public CarriageSeat Seat { get; set; }
+        
+        [Required]
         public TicketType Type { get; set; }
+        
+        [Required]
         public decimal Price { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RailwayTicketOffice.Entity
 {
@@ -13,8 +14,12 @@ namespace RailwayTicketOffice.Entity
             Deluxe
         }
 
-        public int CarriageId { get; set; }
+        public int CarriageID { get; set; }
+        
+        [Required]
         public CarriageType Type { get; set; }
+        
+        [Required]
         public List<CarriageSeat> Seats = new List<CarriageSeat>();
     }
 }
