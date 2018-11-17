@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Railway_Ticket_Office
+namespace RailwayTicketOffice
 {
     public class Startup
     {
