@@ -26,6 +26,11 @@ namespace RailwayTicketOffice.DbContext
                 .HasOne(tc => tc.Carriage)
                 .WithMany(car => car.TrainCarriages)
                 .HasForeignKey(tc => tc.CarriageID);
+
+            modelBuilder.Entity<CarriageSeat>()
+                .Property(seat => seat.Ordered)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
         }
 
         public DbSet<TrainStation> Stations { get; set; }
