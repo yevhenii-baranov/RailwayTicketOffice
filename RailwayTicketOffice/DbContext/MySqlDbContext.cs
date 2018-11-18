@@ -5,7 +5,6 @@ namespace RailwayTicketOffice.DbContext
 {
     public sealed class MySqlDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;database=railway;user=root;password=Philosophy2018");
@@ -14,6 +13,19 @@ namespace RailwayTicketOffice.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Passenger>().HasIndex(passenger => passenger.PassportData).IsUnique();
+
+            modelBuilder.Entity<TrainCarriage>()
+                .HasKey(t => new {t.CarriageID, t.TrainID});
+
+            modelBuilder.Entity<TrainCarriage>()
+                .HasOne(tc => tc.Train)
+                .WithMany(train => train.TrainCarriages)
+                .HasForeignKey(tc => tc.TrainID);
+
+            modelBuilder.Entity<TrainCarriage>()
+                .HasOne(tc => tc.Carriage)
+                .WithMany(car => car.TrainCarriages)
+                .HasForeignKey(tc => tc.CarriageID);
         }
 
         public DbSet<TrainStation> Stations { get; set; }

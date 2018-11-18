@@ -12,7 +12,7 @@ namespace RailwayTicketOffice.Entity
 
         [Required] public DateTime ArrivalTime { get; set; }
 
-        [Required] public List<Carriage> Carriages = new List<Carriage>();
+        [Required] public ICollection<TrainCarriage> TrainCarriages { get; set; }
 
         [Required] public TrainStation DepartureStation { get; set; }
 

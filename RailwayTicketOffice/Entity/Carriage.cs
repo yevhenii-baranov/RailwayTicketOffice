@@ -8,8 +8,8 @@ namespace RailwayTicketOffice.Entity
     public class Carriage : Entity
     {
         [Required] public CarriageType CarriageType { get; set; }
-
-        [Required] public List<CarriageSeat> Seats = new List<CarriageSeat>();
+        
+        [Required] public ICollection<TrainCarriage> TrainCarriages { get; set; }
     }
     
     public enum CarriageType: int
