@@ -16,4 +16,19 @@
       <Folder Include="Properties\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="UI\MainMenu.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="UI\MainMenu.Designer.cs">
+        <DependentUpon>MainMenu.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="UI\MainMenu.resx">
+        <DependentUpon>MainMenu.cs</DependentUpon>
+      </EmbeddedResource>
+    </ItemGroup>
+
 </Project>
