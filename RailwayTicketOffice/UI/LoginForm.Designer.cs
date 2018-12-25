@@ -33,10 +33,11 @@ namespace RailwayTicketOffice
             this.GreetingsLabel = new System.Windows.Forms.Label();
             this.UsernamePromptLabel = new System.Windows.Forms.Label();
             this.PasswordPromptLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.UsernameTextBox = new System.Windows.Forms.TextBox();
+            this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.LoginButton = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
+            this.ErrorLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // GreetingsLabel
@@ -69,21 +70,21 @@ namespace RailwayTicketOffice
             this.PasswordPromptLabel.TabIndex = 2;
             this.PasswordPromptLabel.Text = "Password:";
             // 
-            // textBox1
+            // UsernameTextBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("OpenSymbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(322, 176);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 29);
-            this.textBox1.TabIndex = 3;
+            this.UsernameTextBox.Font = new System.Drawing.Font("OpenSymbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsernameTextBox.Location = new System.Drawing.Point(322, 176);
+            this.UsernameTextBox.Name = "UsernameTextBox";
+            this.UsernameTextBox.Size = new System.Drawing.Size(180, 29);
+            this.UsernameTextBox.TabIndex = 3;
             // 
-            // textBox2
+            // PasswordTextBox
             // 
-            this.textBox2.Font = new System.Drawing.Font("OpenSymbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(322, 268);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(180, 29);
-            this.textBox2.TabIndex = 4;
+            this.PasswordTextBox.Font = new System.Drawing.Font("OpenSymbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordTextBox.Location = new System.Drawing.Point(322, 268);
+            this.PasswordTextBox.Name = "PasswordTextBox";
+            this.PasswordTextBox.Size = new System.Drawing.Size(180, 29);
+            this.PasswordTextBox.TabIndex = 4;
             // 
             // LoginButton
             // 
@@ -94,6 +95,7 @@ namespace RailwayTicketOffice
             this.LoginButton.TabIndex = 5;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // RegisterButton
             // 
@@ -105,15 +107,28 @@ namespace RailwayTicketOffice
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = true;
             // 
+            // ErrorLabel
+            // 
+            this.ErrorLabel.AutoSize = true;
+            this.ErrorLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.ErrorLabel.Location = new System.Drawing.Point(167, 319);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(526, 28);
+            this.ErrorLabel.TabIndex = 7;
+            this.ErrorLabel.Text = "User with given username and password does not exist!";
+            this.ErrorLabel.Visible = false;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.RegisterButton);
             this.Controls.Add(this.LoginButton);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.PasswordTextBox);
+            this.Controls.Add(this.UsernameTextBox);
             this.Controls.Add(this.PasswordPromptLabel);
             this.Controls.Add(this.UsernamePromptLabel);
             this.Controls.Add(this.GreetingsLabel);
@@ -130,9 +145,10 @@ namespace RailwayTicketOffice
         private System.Windows.Forms.Label GreetingsLabel;
         private System.Windows.Forms.Label UsernamePromptLabel;
         private System.Windows.Forms.Label PasswordPromptLabel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox UsernameTextBox;
+        private System.Windows.Forms.TextBox PasswordTextBox;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Button RegisterButton;
+        private Label ErrorLabel;
     }
 }
