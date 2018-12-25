@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RailwayTicketOffice.Entity;
+using System;
 
 namespace RailwayTicketOffice.Database
 {
@@ -12,10 +13,12 @@ namespace RailwayTicketOffice.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasIndex(passenger => passenger.PassportData).IsUnique();
+            modelBuilder.Entity<User>()
+                .HasIndex(passenger => passenger.PassportData)
+                .IsUnique();
 
             modelBuilder.Entity<TrainCarriage>()
-                .HasKey(t => new {t.CarriageID, t.TrainID});
+                .HasKey(t => new { t.CarriageID, t.TrainID });
 
             modelBuilder.Entity<TrainCarriage>()
                 .HasOne(tc => tc.Train)
@@ -31,6 +34,18 @@ namespace RailwayTicketOffice.Database
                 .Property(seat => seat.Ordered)
                 .HasColumnType("bit")
                 .HasDefaultValue(false);
+
+            modelBuilder.Entity<Train>()
+                .Property(train => train.DepartureTime)
+                .HasColumnType("bigint")
+                .HasConversion(depTime => depTime.Ticks,
+                depTimeTicks => new TimeSpan(depTimeTicks));
+
+            modelBuilder.Entity<Train>()
+                .Property(train => train.ArrivalTime)
+                .HasColumnType("bigint")
+                .HasConversion(arrivalTime => arrivalTime.Ticks,
+                arrTimeTicks => new TimeSpan(arrTimeTicks));
         }
 
         public DbSet<TrainStation> Stations { get; set; }
@@ -39,5 +54,6 @@ namespace RailwayTicketOffice.Database
         public DbSet<CarriageSeat> Seats { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Trip> Trips { get; set; }
     }
 }
