@@ -46,6 +46,9 @@ namespace RailwayTicketOffice.Database
                 .HasColumnType("bigint")
                 .HasConversion(arrivalTime => arrivalTime.Ticks,
                 arrTimeTicks => new TimeSpan(arrTimeTicks));
+
+            modelBuilder.Entity<Trip>()
+                .HasOne(trip => trip.Train).WithMany(train => train.Trips);
         }
 
         public DbSet<TrainStation> Stations { get; set; }

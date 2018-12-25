@@ -17,5 +17,7 @@ namespace RailwayTicketOffice.Entity
         [Required] public TrainStation DepartureStation { get; set; }
 
         [Required] public TrainStation ArrivalStation { get; set; }
+
+        public List<Trip> Trips { get; set; }
     }
 }
