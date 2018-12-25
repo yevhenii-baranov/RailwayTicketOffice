@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RailwayTicketOffice.Entity;
 
-namespace RailwayTicketOffice.DbContext
+namespace RailwayTicketOffice.Database
 {
     public sealed class MySqlDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
@@ -38,6 +38,6 @@ namespace RailwayTicketOffice.DbContext
         public DbSet<Carriage> Carriages { get; set; }
         public DbSet<CarriageSeat> Seats { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<User> Passengers { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
