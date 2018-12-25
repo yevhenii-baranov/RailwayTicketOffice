@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace RailwayTicketOffice
 {
-    static class Program
+    static class EntryPoint
     {
         /// <summary>
         /// The main entry point for the application.
