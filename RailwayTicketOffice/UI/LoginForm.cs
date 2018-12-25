@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RailwayTicketOffice
 {
-    public partial class MainMenu : Form
+    public partial class LoginForm : Form
     {
-        public MainMenu()
+        public LoginForm()
         {
             InitializeComponent();
         }

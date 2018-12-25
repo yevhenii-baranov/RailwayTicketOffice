@@ -13,7 +13,7 @@ namespace RailwayTicketOffice
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenu());
+            Application.Run(new LoginForm());
         }
     }
 }
