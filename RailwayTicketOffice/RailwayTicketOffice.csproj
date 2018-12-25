@@ -24,11 +24,20 @@
       <Compile Update="UI\LoginForm.Designer.cs">
         <DependentUpon>LoginForm.cs</DependentUpon>
       </Compile>
+      <Compile Update="UI\Schedule.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="UI\Schedule.Designer.cs">
+        <DependentUpon>Schedule.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Update="UI\LoginForm.resx">
         <DependentUpon>LoginForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="UI\Schedule.resx">
+        <DependentUpon>Schedule.cs</DependentUpon>
       </EmbeddedResource>
     </ItemGroup>
 
