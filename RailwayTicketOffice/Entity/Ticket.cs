@@ -6,7 +6,7 @@ namespace RailwayTicketOffice.Entity
     [Table("ticket")]
     public class Ticket : Entity
     {
-        [Required] public Passenger Passenger { get; set; }
+        [Required] public User Passenger { get; set; }
 
         [Required] public Train Train { get; set; }
 
