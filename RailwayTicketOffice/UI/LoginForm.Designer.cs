@@ -85,6 +85,7 @@ namespace RailwayTicketOffice
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(180, 29);
             this.PasswordTextBox.TabIndex = 4;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
             // 
             // LoginButton
             // 

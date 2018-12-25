@@ -20,14 +20,19 @@ namespace RailwayTicketOffice
                 string username = UsernameTextBox.Text;
                 string password = PasswordTextBox.Text;
 
+                UsernameTextBox.Text = "";
+                PasswordTextBox.Text = "";
+
                 var user = authService.Authenticate(username, password);
                 TicketOfficeApplication.GetInstance().CurrentUser = user;
+
+                Schedule scheduleForm = new Schedule(this);
+                scheduleForm.Show();
+                this.Hide();
             }
             catch (CannotAuthenticateUser ex)
             {
                 ErrorLabel.Visible = true;
-                UsernameTextBox.Text = "";
-                PasswordTextBox.Text = "";
             }
         }
 
