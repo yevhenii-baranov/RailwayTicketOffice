@@ -31,6 +31,11 @@
             this.LogoutButton = new System.Windows.Forms.Button();
             this.UsernameLabel = new System.Windows.Forms.Label();
             this.TrainsListView = new System.Windows.Forms.ListView();
+            this.From = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.To = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.When = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DepartureTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ArrivalTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DatePicker = new System.Windows.Forms.DateTimePicker();
             this.DatePromptLabel = new System.Windows.Forms.Label();
             this.ClearRouteButton = new System.Windows.Forms.Button();
@@ -40,6 +45,7 @@
             this.FromTextBox = new System.Windows.Forms.TextBox();
             this.ToPromptLabel = new System.Windows.Forms.Label();
             this.FromPromptLabel = new System.Windows.Forms.Label();
+            this.FindButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LogoutButton
@@ -65,6 +71,12 @@
             // 
             // TrainsListView
             // 
+            this.TrainsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.From,
+            this.To,
+            this.When,
+            this.DepartureTime,
+            this.ArrivalTime});
             this.TrainsListView.Location = new System.Drawing.Point(12, 122);
             this.TrainsListView.Name = "TrainsListView";
             this.TrainsListView.Size = new System.Drawing.Size(771, 283);
@@ -150,11 +162,22 @@
             this.FromPromptLabel.TabIndex = 11;
             this.FromPromptLabel.Text = "From";
             // 
+            // FindButton
+            // 
+            this.FindButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.FindButton.Location = new System.Drawing.Point(648, 71);
+            this.FindButton.Name = "FindButton";
+            this.FindButton.Size = new System.Drawing.Size(135, 42);
+            this.FindButton.TabIndex = 12;
+            this.FindButton.Text = "Find";
+            this.FindButton.UseVisualStyleBackColor = true;
+            // 
             // Schedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.FindButton);
             this.Controls.Add(this.FromPromptLabel);
             this.Controls.Add(this.ToPromptLabel);
             this.Controls.Add(this.FromTextBox);
@@ -188,5 +211,11 @@
         private System.Windows.Forms.TextBox FromTextBox;
         private System.Windows.Forms.Label ToPromptLabel;
         private System.Windows.Forms.Label FromPromptLabel;
+        private System.Windows.Forms.ColumnHeader From;
+        private System.Windows.Forms.ColumnHeader To;
+        private System.Windows.Forms.ColumnHeader When;
+        private System.Windows.Forms.ColumnHeader DepartureTime;
+        private System.Windows.Forms.ColumnHeader ArrivalTime;
+        private System.Windows.Forms.Button FindButton;
     }
 }

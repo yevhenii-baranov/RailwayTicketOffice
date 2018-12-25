@@ -36,5 +36,10 @@ namespace RailwayTicketOffice
             }
         }
 
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.ShowDialog();
+        }
     }
 }

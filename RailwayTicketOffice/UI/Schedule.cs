@@ -1,24 +1,26 @@
-﻿using System;
+﻿using RailwayTicketOffice.Entity;
+using RailwayTicketOffice.Service;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RailwayTicketOffice
 {
     public partial class Schedule : Form
     {
+
+        private readonly TrainFindingService service = TicketOfficeApplication.GetInstance().GetTrainFindingService();
         private readonly LoginForm parent;
+        private readonly string currentUserName = TicketOfficeApplication.GetInstance().CurrentUser.Username;
         private bool dateSet = false;
 
         public Schedule(LoginForm parent)
         {
             InitializeComponent();
+            TrainsListView.View = View.Details;
 
+            UsernameLabel.Text = $"You are now logged in as {currentUserName}";
+                
             this.parent = parent;
             UpdateFilters();
         }
@@ -32,7 +34,32 @@ namespace RailwayTicketOffice
 
         private void UpdateFilters()
         {
-            //TODO: get data
+            TrainsListView.Items.Clear();
+
+            List<Trip> filteredTrips;
+
+            TrainStation fromStation = null;
+            TrainStation toStation = null;
+            DateTime? departureDate = null;
+
+            if (FromTextBox.Text != "" && ToTextBox.Text != "")
+            {
+               fromStation = TrainFindingService.StationForName(FromTextBox.Text);
+               toStation = TrainFindingService.StationForName(ToTextBox.Text);
+            }
+            if (dateSet)
+            {
+                departureDate = DatePicker.Value;
+            }
+
+            filteredTrips = service.FindTrips(fromStation, toStation, departureDate);
+
+            foreach (var trip in filteredTrips)
+            {
+                string[] values = { trip.Train.DepartureStation.Name, trip.Train.ArrivalStation.Name };
+                var item = new ListViewItem(values);
+                TrainsListView.Items.Add(item);
+            }
         }
 
         private void ClearDateButton_Click(object sender, EventArgs e)
