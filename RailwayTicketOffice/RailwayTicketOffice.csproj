@@ -24,6 +24,12 @@
       <Compile Update="UI\LoginForm.Designer.cs">
         <DependentUpon>LoginForm.cs</DependentUpon>
       </Compile>
+      <Compile Update="UI\RegisterForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="UI\RegisterForm.Designer.cs">
+        <DependentUpon>RegisterForm.cs</DependentUpon>
+      </Compile>
       <Compile Update="UI\Schedule.cs">
         <SubType>Form</SubType>
       </Compile>
@@ -35,6 +41,9 @@
     <ItemGroup>
       <EmbeddedResource Update="UI\LoginForm.resx">
         <DependentUpon>LoginForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="UI\RegisterForm.resx">
+        <DependentUpon>RegisterForm.cs</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Update="UI\Schedule.resx">
         <DependentUpon>Schedule.cs</DependentUpon>
