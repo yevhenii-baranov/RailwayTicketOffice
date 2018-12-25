@@ -7,12 +7,12 @@ namespace RailwayTicketOffice.DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=railway;user=root;password=Philosophy2018");
+            optionsBuilder.UseMySQL("server=localhost;database=railway;user=root;password=dotnetframework");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Passenger>().HasIndex(passenger => passenger.PassportData).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(passenger => passenger.PassportData).IsUnique();
 
             modelBuilder.Entity<TrainCarriage>()
                 .HasKey(t => new {t.CarriageID, t.TrainID});
@@ -38,6 +38,6 @@ namespace RailwayTicketOffice.DbContext
         public DbSet<Carriage> Carriages { get; set; }
         public DbSet<CarriageSeat> Seats { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<User> Passengers { get; set; }
     }
 }
