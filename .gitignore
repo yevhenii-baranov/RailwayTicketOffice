@@ -34,3 +34,9 @@ msbuild.wrn
 .vs/
 #JetBrains Rider
 .idea/*
+
+# Auxiliary Windows Forms Designer Project (it will be not necessary after .NET Core 3.0 RTM release)
+RailwayTicketOffice.Designer/*
+
+# All migration files
+Migrations/*

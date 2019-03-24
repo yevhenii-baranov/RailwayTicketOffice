@@ -10,6 +10,11 @@ namespace RailwayTicketOffice.Entity
         [Required] public CarriageType CarriageType { get; set; }
 
         public ICollection<TrainCarriage> TrainCarriages { get; set; }
+
+        public override string ToString() 
+        {
+            return $"Carriage with ID {ID}; type={CarriageType.ToString()}";
+        }
     }
 
     public enum CarriageType : int
@@ -20,4 +25,6 @@ namespace RailwayTicketOffice.Entity
         Compartment = 4,
         Deluxe = 5
     }
+    
+  
 }
