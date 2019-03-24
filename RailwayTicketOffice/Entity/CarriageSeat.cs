@@ -11,5 +11,10 @@ namespace RailwayTicketOffice.Entity
         [Required] public bool Ordered { get; set; }
         
         [Required] public Carriage Carriage { get; set; }
+
+        public override string ToString()
+        {
+            return $"Seat #{NumberInCarriage}";
+        }
     }
 }

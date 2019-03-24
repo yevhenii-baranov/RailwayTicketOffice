@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using RailwayTicketOffice.Entity;
 using System;
 
@@ -6,6 +7,7 @@ namespace RailwayTicketOffice.Database
 {
     public sealed class MySqlDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;database=railway;user=root;password=dotnetframework");
@@ -58,5 +60,6 @@ namespace RailwayTicketOffice.Database
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Trip> Trips { get; set; }
+        public DbSet<TrainCarriage> TrainCarriages { get; set; }
     }
 }

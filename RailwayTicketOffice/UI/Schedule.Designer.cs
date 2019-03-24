@@ -46,14 +46,16 @@
             this.ToPromptLabel = new System.Windows.Forms.Label();
             this.FromPromptLabel = new System.Windows.Forms.Label();
             this.FindButton = new System.Windows.Forms.Button();
+            this.OrdersButton = new System.Windows.Forms.Button();
+            this.AdminSettingsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LogoutButton
             // 
-            this.LogoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.LogoutButton.Location = new System.Drawing.Point(648, 13);
+            this.LogoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.LogoutButton.Location = new System.Drawing.Point(848, 351);
             this.LogoutButton.Name = "LogoutButton";
-            this.LogoutButton.Size = new System.Drawing.Size(140, 34);
+            this.LogoutButton.Size = new System.Drawing.Size(169, 54);
             this.LogoutButton.TabIndex = 0;
             this.LogoutButton.Text = "Logout";
             this.LogoutButton.UseVisualStyleBackColor = true;
@@ -63,7 +65,7 @@
             // 
             this.UsernameLabel.AutoSize = true;
             this.UsernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsernameLabel.Location = new System.Drawing.Point(12, 15);
+            this.UsernameLabel.Location = new System.Drawing.Point(626, 9);
             this.UsernameLabel.Name = "UsernameLabel";
             this.UsernameLabel.Size = new System.Drawing.Size(236, 25);
             this.UsernameLabel.TabIndex = 1;
@@ -77,11 +79,34 @@
             this.When,
             this.DepartureTime,
             this.ArrivalTime});
+            this.TrainsListView.FullRowSelect = true;
             this.TrainsListView.Location = new System.Drawing.Point(12, 122);
+            this.TrainsListView.MultiSelect = false;
             this.TrainsListView.Name = "TrainsListView";
             this.TrainsListView.Size = new System.Drawing.Size(771, 283);
             this.TrainsListView.TabIndex = 2;
             this.TrainsListView.UseCompatibleStateImageBehavior = false;
+            this.TrainsListView.DoubleClick += new System.EventHandler(this.TrainsListView_DoubleClick);
+            // 
+            // From
+            // 
+            this.From.Text = "From";
+            // 
+            // To
+            // 
+            this.To.Text = "To";
+            // 
+            // When
+            // 
+            this.When.Text = "When";
+            // 
+            // DepartureTime
+            // 
+            this.DepartureTime.Text = "Departure Time";
+            // 
+            // ArrivalTime
+            // 
+            this.ArrivalTime.Text = "Arrival Time";
             // 
             // DatePicker
             // 
@@ -171,12 +196,38 @@
             this.FindButton.TabIndex = 12;
             this.FindButton.Text = "Find";
             this.FindButton.UseVisualStyleBackColor = true;
+            this.FindButton.Click += new System.EventHandler(this.FindButton_Click);
+            // 
+            // OrdersButton
+            // 
+            this.OrdersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.OrdersButton.Location = new System.Drawing.Point(848, 260);
+            this.OrdersButton.Name = "OrdersButton";
+            this.OrdersButton.Size = new System.Drawing.Size(169, 49);
+            this.OrdersButton.TabIndex = 13;
+            this.OrdersButton.Text = "My tickets";
+            this.OrdersButton.UseVisualStyleBackColor = true;
+            this.OrdersButton.Click += new System.EventHandler(this.OrdersButton_Click);
+            // 
+            // AdminSettingsButton
+            // 
+            this.AdminSettingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.AdminSettingsButton.Location = new System.Drawing.Point(848, 89);
+            this.AdminSettingsButton.Name = "AdminSettingsButton";
+            this.AdminSettingsButton.Size = new System.Drawing.Size(169, 58);
+            this.AdminSettingsButton.TabIndex = 14;
+            this.AdminSettingsButton.Text = "Admin settings";
+            this.AdminSettingsButton.UseVisualStyleBackColor = true;
+            this.AdminSettingsButton.Visible = false;
+            this.AdminSettingsButton.Click += new System.EventHandler(this.AdminSettingsButton_Click);
             // 
             // Schedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1068, 450);
+            this.Controls.Add(this.AdminSettingsButton);
+            this.Controls.Add(this.OrdersButton);
             this.Controls.Add(this.FindButton);
             this.Controls.Add(this.FromPromptLabel);
             this.Controls.Add(this.ToPromptLabel);
@@ -217,5 +268,7 @@
         private System.Windows.Forms.ColumnHeader DepartureTime;
         private System.Windows.Forms.ColumnHeader ArrivalTime;
         private System.Windows.Forms.Button FindButton;
+        private System.Windows.Forms.Button OrdersButton;
+        private System.Windows.Forms.Button AdminSettingsButton;
     }
 }

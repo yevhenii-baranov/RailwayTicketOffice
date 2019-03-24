@@ -13,14 +13,25 @@ namespace RailwayTicketOffice
     {
         private static TicketOfficeApplication application = null;
 
-        private readonly AuthenticationService authService = new AuthenticationService();
         private readonly TrainFindingService trainFindingService = new TrainFindingService();
-
+        private readonly TicketService ticketService = new TicketService();
+        private readonly UserManagementService userManagementService = new UserManagementService();
 
         public User CurrentUser { get; set; }
 
         private TicketOfficeApplication()
         {
+        }
+        public TicketService GetTicketService()
+        {
+            return ticketService;
+        }
+
+        private readonly AuthenticationService authService = new AuthenticationService();
+
+        public UserManagementService GetUserManagementService()
+        {
+            return userManagementService;
         }
 
         public AuthenticationService GetAuthenticationService()

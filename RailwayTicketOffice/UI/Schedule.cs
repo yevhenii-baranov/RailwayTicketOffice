@@ -11,16 +11,23 @@ namespace RailwayTicketOffice
 
         private readonly TrainFindingService service = TicketOfficeApplication.GetInstance().GetTrainFindingService();
         private readonly LoginForm parent;
-        private readonly string currentUserName = TicketOfficeApplication.GetInstance().CurrentUser.Username;
-        private bool dateSet = false;
+        private readonly User currentUser = TicketOfficeApplication.GetInstance().CurrentUser;
+        private bool dateSet;
+        private List<Trip> currentTripList;
 
         public Schedule(LoginForm parent)
         {
             InitializeComponent();
             TrainsListView.View = View.Details;
 
-            UsernameLabel.Text = $"You are now logged in as {currentUserName}";
-                
+            UsernameLabel.Text = $"You are now logged in as {currentUser.Username}";
+            if(currentUser.UserRole == User.Role.ADMINISTRATOR)
+            {
+                AdminSettingsButton.Visible = true;
+            }
+            DatePicker.MinDate = DateTime.Now;
+
+            dateSet = false;
             this.parent = parent;
             UpdateFilters();
         }
@@ -36,8 +43,6 @@ namespace RailwayTicketOffice
         {
             TrainsListView.Items.Clear();
 
-            List<Trip> filteredTrips;
-
             TrainStation fromStation = null;
             TrainStation toStation = null;
             DateTime? departureDate = null;
@@ -52,20 +57,31 @@ namespace RailwayTicketOffice
                 departureDate = DatePicker.Value;
             }
 
-            filteredTrips = service.FindTrips(fromStation, toStation, departureDate);
+            currentTripList = service.FindTrips(fromStation, toStation, departureDate);
 
-            foreach (var trip in filteredTrips)
+            foreach (var trip in currentTripList)
             {
-                string[] values = { trip.Train.DepartureStation.Name, trip.Train.ArrivalStation.Name };
+                string[] values = { trip.Train.DepartureStation.Name,
+                                    trip.Train.ArrivalStation.Name,
+                                    trip.TripDate.ToShortDateString(),
+                                    trip.Train.DepartureTime.ToString(@"hh\:mm"),
+                                    trip.Train.ArrivalTime.ToString(@"hh\:mm")};
                 var item = new ListViewItem(values);
                 TrainsListView.Items.Add(item);
             }
+
+            TrainsListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);
+            TrainsListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
+            TrainsListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+            TrainsListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+            TrainsListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void ClearDateButton_Click(object sender, EventArgs e)
         {
             dateSet = false;
             DatePicker.Value = DateTime.Now;
+            
 
             UpdateFilters();
         }
@@ -91,6 +107,29 @@ namespace RailwayTicketOffice
         {
             dateSet = true;
 
+            UpdateFilters();
+        }
+
+        private void OrdersButton_Click(object sender, EventArgs e)
+        {
+            TicketInfo infoWindow = new TicketInfo();
+            infoWindow.ShowDialog();
+        }
+
+        private void AdminSettingsButton_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void TrainsListView_DoubleClick(object sender, EventArgs e)
+        {
+            int position = TrainsListView.SelectedIndices[0];
+            TicketChooseForm ticketForm = new TicketChooseForm(currentTripList[position]);
+            ticketForm.ShowDialog();
+        }
+
+        private void FindButton_Click(object sender, EventArgs e)
+        {
             UpdateFilters();
         }
     }
