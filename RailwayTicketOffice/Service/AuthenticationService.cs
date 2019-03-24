@@ -1,15 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using RailwayTicketOffice.Database;
 using RailwayTicketOffice.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace RailwayTicketOffice.Service
 {
-    class AuthenticationService
+    internal class AuthenticationService
     {
         public User Authenticate(string username, string password)
         {
@@ -20,6 +17,7 @@ namespace RailwayTicketOffice.Service
                 {
                     return user;
                 }
+
                 throw new CannotAuthenticateUser(username, password);
             }
         }
@@ -28,7 +26,7 @@ namespace RailwayTicketOffice.Service
         {
             try
             {
-                User user = new User
+                var user = new User
                 {
                     FirstName = firstName,
                     LastName = lastName,
@@ -51,25 +49,24 @@ namespace RailwayTicketOffice.Service
 
     public class CannotRegisterUserException : Exception
     {
-        private readonly DbUpdateException ex;
+        private readonly DbUpdateException _ex;
 
         public CannotRegisterUserException(DbUpdateException ex)
         {
-            this.ex = ex;
+            this._ex = ex;
         }
 
         public Exception GetCause()
         {
-            return ex;
+            return _ex;
         }
     }
 
     public class CannotAuthenticateUser : Exception
     {
         public CannotAuthenticateUser(string username, string password)
-            : base("There is no user with user name {0} and password {1}")
+            : base($"There is no user with user name {username} and password {password}")
         {
-
         }
     };
 }
