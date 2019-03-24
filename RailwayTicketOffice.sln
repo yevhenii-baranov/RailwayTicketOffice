@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailwayTicketOffice", "RailwayTicketOffice\RailwayTicketOffice.csproj", "{FC32D28C-D79B-46F7-9A00-23039AA8CFC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailwayTicketOffice.Designer", "RailwayTicketOffice.Designer\RailwayTicketOffice.Designer.csproj", "{53CCB5C6-0E83-4B90-A63A-04769435F859}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{FC32D28C-D79B-46F7-9A00-23039AA8CFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC32D28C-D79B-46F7-9A00-23039AA8CFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC32D28C-D79B-46F7-9A00-23039AA8CFC4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53CCB5C6-0E83-4B90-A63A-04769435F859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53CCB5C6-0E83-4B90-A63A-04769435F859}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53CCB5C6-0E83-4B90-A63A-04769435F859}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53CCB5C6-0E83-4B90-A63A-04769435F859}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
