@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RailwayTicketOffice.Migrations
 {
-    public partial class trainid2 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,9 +108,10 @@ namespace RailwayTicketOffice.Migrations
                         .Annotation("MySQL:AutoIncrement", true),
                     PassengerID = table.Column<int>(nullable: false),
                     TrainID = table.Column<int>(nullable: false),
-                    SeatID = table.Column<int>(nullable: false),
+                    SeatId = table.Column<int>(nullable: false),
                     TicketType = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false)
+                    Price = table.Column<decimal>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,8 +123,8 @@ namespace RailwayTicketOffice.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ticket_seat_SeatID",
-                        column: x => x.SeatID,
+                        name: "FK_ticket_seat_SeatId",
+                        column: x => x.SeatId,
                         principalTable: "seat",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -190,9 +191,9 @@ namespace RailwayTicketOffice.Migrations
                 column: "PassengerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ticket_SeatID",
+                name: "IX_ticket_SeatId",
                 table: "ticket",
-                column: "SeatID");
+                column: "SeatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ticket_TrainID",

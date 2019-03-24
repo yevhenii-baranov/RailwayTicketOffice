@@ -14,7 +14,7 @@ namespace RailwayTicketOffice.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
             modelBuilder.Entity("RailwayTicketOffice.Entity.Carriage", b =>
                 {
@@ -54,11 +54,13 @@ namespace RailwayTicketOffice.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("Date");
+
                     b.Property<int>("PassengerID");
 
                     b.Property<decimal>("Price");
 
-                    b.Property<int>("SeatID");
+                    b.Property<int>("SeatId");
 
                     b.Property<int>("TicketType");
 
@@ -68,7 +70,7 @@ namespace RailwayTicketOffice.Migrations
 
                     b.HasIndex("PassengerID");
 
-                    b.HasIndex("SeatID");
+                    b.HasIndex("SeatId");
 
                     b.HasIndex("TrainID");
 
@@ -185,7 +187,7 @@ namespace RailwayTicketOffice.Migrations
 
                     b.HasOne("RailwayTicketOffice.Entity.CarriageSeat", "Seat")
                         .WithMany()
-                        .HasForeignKey("SeatID")
+                        .HasForeignKey("SeatId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("RailwayTicketOffice.Entity.Train", "Train")
