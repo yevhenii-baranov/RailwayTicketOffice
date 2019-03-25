@@ -1,0 +1,11 @@
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Registration finish</h2>
+<h4>Congratulations, you are now registered!<br>
+    You can now proceed to the login page and log in as usual.</h4>
+    @Html.ActionLink("To login page", "Login", "Account",
+        htmlAttributes: new {@class="btn btn-primary"})

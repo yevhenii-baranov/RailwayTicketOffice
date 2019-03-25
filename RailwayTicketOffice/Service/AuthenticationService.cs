@@ -48,14 +48,12 @@ namespace RailwayTicketOffice.Service
             }
         }
 
-        internal void Register(string firstName, string lastName, string email, string password)
+        internal void Register(string email, string password)
         {
             try
             {
                 var user = new User
                 {
-                    FirstName = firstName,
-                    LastName = lastName,
                     Email = email,
                     Password = password,
                     UserRole = User.Role.USER

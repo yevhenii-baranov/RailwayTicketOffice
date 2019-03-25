@@ -62,5 +62,42 @@ namespace RailwayTicketOffice.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Register(UserRegisterModel model)
+        {
+            _logger.LogInformation("Trying to register user {}", model.Email);
+            
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var email = model.Email;
+                    var password = model.Password;
+                    var passConfirmation = model.PasswordConfirmation;
+
+                    if (password.Equals(passConfirmation))
+                    {
+                        _service.Register(email, password);
+                        ModelState.Clear();
+                        return RedirectToAction("RegFinish");
+                    }
+
+                    ModelState.AddModelError("passValidation",
+                        "Passwords don't match. Please check them one more time");
+                }
+            }
+            catch (CannotRegisterUserException e)
+            {
+                _logger.LogWarning("User registration failed: {}", e.StackTrace);
+            }
+
+            return View(model);
+        }
+
+        public IActionResult RegFinish()
+        {
+            return View();
+        }
     }
 }
