@@ -1,6 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using RailwayTicketOffice.Database;
 using RailwayTicketOffice.Entity;
 
@@ -8,21 +15,40 @@ namespace RailwayTicketOffice.Service
 {
     internal class AuthenticationService
     {
-        public User Authenticate(string username, string password)
+        private readonly ILogger _logger = new LoggerFactory().CreateLogger(typeof(AuthenticationService));
+        
+        public async Task Authenticate(string email, string password, HttpContext httpContext)
         {
             using (var context = new MySqlDbContext())
             {
-                var user = context.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
+                var user = await context.Users
+                    .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+
                 if (user != null)
                 {
-                    return user;
-                }
 
-                throw new CannotAuthenticateUser(username, password);
+                    // Creating claim
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                        new Claim(ClaimsIdentity.DefaultRoleClaimType, user.UserRole.ToString())
+                    };
+                    
+                    var role = user.UserRole.ToString();
+                    
+                    // Creating Claim Identity
+                    var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
+                        ClaimsIdentity.DefaultRoleClaimType);
+
+                    // Setting up authentication cookies
+                    await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(id));
+                }
+                else throw new CannotAuthenticateUser(email, password);
             }
         }
 
-        internal void Register(string firstName, string lastName, string login, string password)
+        internal void Register(string firstName, string lastName, string email, string password)
         {
             try
             {
@@ -30,7 +56,7 @@ namespace RailwayTicketOffice.Service
                 {
                     FirstName = firstName,
                     LastName = lastName,
-                    Username = login,
+                    Email = email,
                     Password = password,
                     UserRole = User.Role.USER
                 };
@@ -44,6 +70,11 @@ namespace RailwayTicketOffice.Service
             {
                 throw new CannotRegisterUserException(ex);
             }
+        }
+
+        public async Task LogOut(HttpContext context)
+        {
+            await context.SignOutAsync();
         }
     }
 
