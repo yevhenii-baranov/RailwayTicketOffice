@@ -36,8 +36,8 @@ namespace RailwayTicketOffice
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = new PathString("/Login");
-                    options.AccessDeniedPath = new PathString("/Login");
+                    options.LoginPath = new PathString("/Account/Login");
+                    options.AccessDeniedPath = new PathString("/Account/Login");
                 });
 
             
@@ -73,7 +73,7 @@ namespace RailwayTicketOffice
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Login}/{action=Index}");
+                    template: "{controller=Dashboard}/{action=Index}");
             });
         }
     }

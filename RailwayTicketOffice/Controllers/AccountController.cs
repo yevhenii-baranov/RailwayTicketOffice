@@ -8,37 +8,42 @@ using AuthenticationService = RailwayTicketOffice.Service.AuthenticationService;
 namespace RailwayTicketOffice.Controllers
 {
     [AllowAnonymous]
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         private readonly AuthenticationService _service = new AuthenticationService();
-        
-        public IActionResult Index(LoginModel model)
+
+        public IActionResult Login()
         {
-            return View(model);
+            return View();
         }
 
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _service.Authenticate(model.Email, model.Password, HttpContext);
+                    var email = model.Email;
+                    var password = model.Password;
+                    ModelState.Clear();
+                    _service.Authenticate(email, password, HttpContext);
                     return RedirectToAction("Index", "Dashboard");
                 }
-                catch (CannotAuthenticateUser e)
-                {
-                    return Index(model);
-                }
+                ModelState.AddModelError("SubmitButton", "Email or password you entered is not correct. \n" +
+                                                         "Please try again.");
             }
-            else return Index(model);
+            catch (CannotAuthenticateUser e)
+            {
+            }
+            
+            return RedirectToAction("Login");
         }
 
         public IActionResult Logout()
         {
             _service.LogOut(HttpContext);
-            return RedirectToAction("Index");
+            return RedirectToAction("Login");
         }
 
         public IActionResult Register()
