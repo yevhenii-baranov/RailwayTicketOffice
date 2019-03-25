@@ -150,19 +150,15 @@ namespace RailwayTicketOffice.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired();
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName")
-                        .IsRequired();
+                    b.Property<string>("LastName");
 
                     b.Property<string>("PassportData");
 
                     b.Property<string>("Password");
 
                     b.Property<int>("UserRole");
-
-                    b.Property<string>("Username");
 
                     b.HasKey("ID");
 
