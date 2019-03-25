@@ -7,17 +7,16 @@ using AuthenticationService = RailwayTicketOffice.Service.AuthenticationService;
 
 namespace RailwayTicketOffice.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly AuthenticationService _service = new AuthenticationService();
         
-        [AllowAnonymous]
         public IActionResult Index(LoginModel model)
         {
             return View(model);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
@@ -40,6 +39,11 @@ namespace RailwayTicketOffice.Controllers
         {
             _service.LogOut(HttpContext);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Register()
+        {
+            return View();
         }
     }
 }

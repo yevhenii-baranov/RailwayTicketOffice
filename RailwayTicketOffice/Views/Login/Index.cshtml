@@ -9,13 +9,14 @@
 {
     <div class="form-group">
         @Html.LabelFor(loginModel => loginModel.Email)
-        @Html.TextBoxFor(loginModel => loginModel.Email, new { @class = "form-control" })
+        @Html.TextBoxFor(loginModel => loginModel.Email, new {@class = "form-control"})
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Password)
-        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+        @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
     </div>
-             
-    <input type="submit" class="form-control" value="Log in"/>
+
+    <input type="submit" class="form-control btn btn-primary" value="Log in">
+    @Html.ActionLink("Register", "Register", "Login", htmlAttributes: new {@class = "form-control btn btn-primary"})
 }
