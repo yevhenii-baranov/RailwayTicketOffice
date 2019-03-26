@@ -24,7 +24,7 @@
             <td> @Html.DisplayFor(models => tripModel.DepartureTime) </td>
             <td> @Html.DisplayFor(models => tripModel.ArrivalTime) </td>
             <td>
-                @Html.ActionLink("Buy ticket", "Buy", "TicketBuying", @tripModel.ID,
+                @Html.ActionLink("Buy ticket", "Buy", "BuyTicket", new {tripId = @tripModel.ID},
                     new {@class = "btn btn-primary"})
             </td>
 
