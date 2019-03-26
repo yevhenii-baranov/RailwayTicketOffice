@@ -15,20 +15,25 @@
                     data-target="#collapse-@carriage.Id">
                 Carriage №@carriage.Id</button>
             <div class="collapse" id="collapse-@carriage.Id">
-                @foreach (var seat in carriage.Seats)
-                {
-                    <span>Seat №@seat.NumberInCarriage</span>
-                    <span>Type: @carriage.Type.ToString().ToLower()</span>
-                    <span>Price: @carriage.Price</span>
-                    <span>
-                        <input type="hidden" name="tripId" value=@Model.TripId/>
-                        <input type="hidden" name="seatId" value=@seat.SeatId/>
-                        <input type="hidden" name="userEmail" value="@User.Identity.Name"/>
-                        <input type="submit" value="Buy ticket">
-                    </span>
-                }
-
-                kek
+                <table>
+                    @foreach (var seat in carriage.Seats)
+                    {
+                        <tr>
+                            @using(@Html.BeginForm("Buy", "BuyTicket", FormMethod.Post))
+                            {
+                            <td>Seat №@seat.NumberInCarriage</td>
+                            <td>Type: @carriage.Type.ToString().ToLower()</td>
+                            <td>Price: @carriage.Price</td>
+                            <td>
+                                <input type="hidden" name="tripId" value=@Model.TripId/>
+                                <input type="hidden" name="seatId" value=@seat.SeatId/>
+                                <input type="hidden" name="userEmail" value="@User.Identity.Name"/>
+                                <input type="submit" value="Buy ticket">
+                            </td>
+                            }
+                        </tr>
+                    }
+                </table>
             </div>
         </div>
     </div>
