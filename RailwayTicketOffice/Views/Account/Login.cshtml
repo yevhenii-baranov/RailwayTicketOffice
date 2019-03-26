@@ -8,7 +8,7 @@
 {
     <div class="form-group">
         @Html.LabelFor(loginModel => loginModel.Email)
-        @Html.TextBoxFor(loginModel => loginModel.Email, new {@class = "form-control"})
+        @Html.TextBoxFor(loginModel => loginModel.Email, new {@class = "form-control", @type="email"})
         @Html.ValidationMessageFor(loginModel => loginModel.Email, "",new {@class="text-danger d-none"})
         </div>
 
