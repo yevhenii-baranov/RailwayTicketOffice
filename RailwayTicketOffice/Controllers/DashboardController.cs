@@ -28,5 +28,10 @@ namespace RailwayTicketOffice.Controllers
             });
             return View(tripModels);
         }
+
+        public IActionResult Orders()
+        {
+            return View();
+        }
     }
 }
