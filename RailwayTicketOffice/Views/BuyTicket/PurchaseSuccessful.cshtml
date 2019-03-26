@@ -1,0 +1,12 @@
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Purchase successful</h2>
+
+Your purchase was successful!<br/>
+You can access all of your purchases using "My Orders" button.
+
+@Html.ActionLink("Back to dashboard", "Index", "Dashboard", 
+    null, new {@class="btn btn-primary"})
