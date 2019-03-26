@@ -32,11 +32,6 @@ namespace RailwayTicketOffice.Database
                 .WithMany(car => car.TrainCarriages)
                 .HasForeignKey(tc => tc.CarriageID);
 
-            modelBuilder.Entity<CarriageSeat>()
-                .Property(seat => seat.Ordered)
-                .HasColumnType("bit")
-                .HasDefaultValue(false);
-
             modelBuilder.Entity<Train>()
                 .Property(train => train.DepartureTime)
                 .HasColumnType("bigint")

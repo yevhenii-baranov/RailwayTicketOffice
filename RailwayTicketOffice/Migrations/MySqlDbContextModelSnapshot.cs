@@ -37,11 +37,6 @@ namespace RailwayTicketOffice.Migrations
 
                     b.Property<int>("NumberInCarriage");
 
-                    b.Property<short>("Ordered")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue((short)0);
-
                     b.HasKey("ID");
 
                     b.HasIndex("CarriageID");
