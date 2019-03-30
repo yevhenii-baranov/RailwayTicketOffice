@@ -31,7 +31,9 @@ namespace RailwayTicketOffice
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<DbContext, MySqlDbContext>();
+            services.AddDbContext<MySqlDbContext>(options => 
+                options.UseMySQL("server=localhost;database=railway;user=root;password=dotnetframework"));
+            
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

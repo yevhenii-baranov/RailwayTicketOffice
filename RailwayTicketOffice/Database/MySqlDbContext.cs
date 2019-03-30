@@ -7,6 +7,13 @@ namespace RailwayTicketOffice.Database
 {
     public sealed class MySqlDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
+        public MySqlDbContext()
+        {
+        }
+
+        public MySqlDbContext(DbContextOptions<MySqlDbContext> options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,7 +27,7 @@ namespace RailwayTicketOffice.Database
                 .IsUnique();
 
             modelBuilder.Entity<TrainCarriage>()
-                .HasKey(t => new { t.CarriageID, t.TrainID });
+                .HasKey(t => new {t.CarriageID, t.TrainID});
 
             modelBuilder.Entity<TrainCarriage>()
                 .HasOne(tc => tc.Train)
@@ -36,13 +43,13 @@ namespace RailwayTicketOffice.Database
                 .Property(train => train.DepartureTime)
                 .HasColumnType("bigint")
                 .HasConversion(depTime => depTime.Ticks,
-                depTimeTicks => new TimeSpan(depTimeTicks));
+                    depTimeTicks => new TimeSpan(depTimeTicks));
 
             modelBuilder.Entity<Train>()
                 .Property(train => train.ArrivalTime)
                 .HasColumnType("bigint")
                 .HasConversion(arrivalTime => arrivalTime.Ticks,
-                arrTimeTicks => new TimeSpan(arrTimeTicks));
+                    arrTimeTicks => new TimeSpan(arrTimeTicks));
 
             modelBuilder.Entity<Trip>()
                 .HasOne(trip => trip.Train).WithMany(train => train.Trips);
