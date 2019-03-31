@@ -33,10 +33,20 @@
                         <li class="nav-item active">
                             <span class="navbar-text text-white">Welcome, @User.Identity.Name!</span>
                         </li>
+                       
                         <li class="nav-item active">
                             @Html.ActionLink("My orders", "Orders", "Dashboard",
                                 null, new {@class = "nav-link"})
                         </li>
+                        
+                        if(User.IsInRole("ADMINISTRATOR"))
+                        {
+                            <li class="nav-item active">
+                                @Html.ActionLink("Managament panel", "Show", "Management",
+                                    null, new {@class="nav-link"})
+                            </li>
+                        }
+                        
                     }
 
                 </ul>
