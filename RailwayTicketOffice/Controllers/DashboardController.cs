@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using RailwayTicketOffice.Entity;
 using RailwayTicketOffice.Models;
 using RailwayTicketOffice.Service;
 
