@@ -12,11 +12,13 @@ namespace RailwayTicketOffice.Controllers
     [Authorize]
     public class DashboardController : Controller
     {
-        private readonly TrainFindingService _service = new TrainFindingService();
+        private readonly TrainFindingService _trainFindingService = new TrainFindingService();
+        private readonly TicketService _ticketService = new TicketService();
+        private readonly UserManagementService _userManagementService = new UserManagementService();
         
         public IActionResult Index()
         {
-            var trips = _service.FindTrips(null, null, null);
+            var trips = _trainFindingService.FindTrips(null, null, null);
             var tripModels = trips.Select(trip => new TripModel
             {
                 ID = trip.ID,
@@ -31,7 +33,20 @@ namespace RailwayTicketOffice.Controllers
 
         public IActionResult Orders()
         {
-            return View();
+            var email = HttpContext.User.Identity.Name;
+            var currentUser = _userManagementService.FindByEmail(email);
+            var orderList = _ticketService.GetTickets(currentUser);
+
+            var orders = new List<OrderModel>();
+            foreach (var ticket in orderList)
+            {
+                var order = new OrderModel
+                {
+                };
+                orders.Add(order);
+            }
+
+            return View(orders);
         }
     }
 }
