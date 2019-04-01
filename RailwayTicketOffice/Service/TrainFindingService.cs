@@ -58,7 +58,8 @@ namespace RailwayTicketOffice.Service
                     SeatId = currentSeat.ID,
                     TicketType = TicketType.Full,
                     Train = trip.Train,
-                    Date = trip.TripDate
+                    TripDate = trip.TripDate,
+                    PurchaseDate = DateTime.Now
                 };
                 context.Tickets.Update(ticket);
                 context.SaveChanges();
