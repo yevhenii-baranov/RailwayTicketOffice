@@ -52,9 +52,16 @@ namespace RailwayTicketOffice.Controllers
         [HttpPost]
         public IActionResult Buy(int tripId, int seatId, string userEmail)
         {
+            var currentUser = _userManagementService.FindByEmail(userEmail);
+
+          /*  if (currentUser.PassportData == null || currentUser.FirstName == null || currentUser.LastName == null)
+            {
+                return ();
+            }*/
+            
+            
             var trip = _trainFindingService.GetTripById(tripId);
             var seat = _trainFindingService.GetSeatById(seatId);
-            var currentUser = _userManagementService.FindByEmail(userEmail);
             
             _trainFindingService.BuyTicket(trip, seat, currentUser);
 

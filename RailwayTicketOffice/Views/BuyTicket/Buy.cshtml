@@ -19,18 +19,17 @@
                     @foreach (var seat in carriage.Seats)
                     {
                         <tr>
-                            @using(@Html.BeginForm("Buy", "BuyTicket", FormMethod.Post))
-                            {
                             <td>Seat №@seat.NumberInCarriage</td>
                             <td>Type: @carriage.Type.ToString().ToLower()</td>
                             <td>Price: @carriage.Price</td>
                             <td>
-                                <input type="hidden" name="tripId" value=@Model.TripId/>
-                                <input type="hidden" name="seatId" value=@seat.SeatId/>
-                                <input type="hidden" name="userEmail" value="@User.Identity.Name"/>
-                                <input type="submit" value="Buy ticket">
+                                <form method="post" asp-action="Buy" asp-controller="BuyTicket" id=@seat.SeatId>
+                                    <input type="hidden" name="tripId" value="@Model.TripId"/>
+                                    <input type="hidden" name="seatId" value="@seat.SeatId"/>
+                                    <input type="hidden" name="userEmail" value="@User.Identity.Name"/>
+                                    <input type="submit" value="Buy ticket" class="btn btn-secondary">
+                                </form>
                             </td>
-                            }
                         </tr>
                     }
                 </table>

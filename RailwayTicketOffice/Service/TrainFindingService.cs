@@ -130,7 +130,8 @@ namespace RailwayTicketOffice.Service
         {
             using (var context = new MySqlDbContext())
             {
-                return context.Seats.FirstOrDefault(seat => seat.ID == seatId);
+                return context.Seats.Include(seat => seat.Carriage)
+                    .FirstOrDefault(seat => seat.ID == seatId);
             }
         }
     }
