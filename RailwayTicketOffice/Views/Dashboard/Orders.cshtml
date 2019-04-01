@@ -16,5 +16,17 @@
 }
 else
 {
-    <div>kek</div>
+    foreach (var order in Model)
+    {
+        <div class="container">
+            <div class="card border-danger">
+                <button class="btn btn-danger" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-@order.TicketId"
+                        data-target="#collapse-@order.TicketId">
+                    Order from @Html.DisplayFor(model => order.PurchaseDate)</button>
+                <div class="collapse" id="collapse-@order.TicketId">
+                Kek
+                    </div>
+            </div>
+        </div> 
+    }
 }
