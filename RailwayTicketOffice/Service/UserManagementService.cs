@@ -16,5 +16,13 @@ namespace RailwayTicketOffice.Service
             return userFromDb;
         }
     }
+
+    public User FindByEmail(string email)
+    {
+        using (var context = new MySqlDbContext())
+        {
+            return context.Users.FirstOrDefault(u => u.Email == email);
+        }
+    }
 }
 }

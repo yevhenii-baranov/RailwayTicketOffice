@@ -1,0 +1,41 @@
+@model RailwayTicketOffice.Models.AvailableSeatsModel
+
+@{
+    ViewBag.Title = "Buy ticket";
+    Layout = "_Layout";
+}
+
+<h2>Buy ticket</h2>
+
+@foreach (var carriage in Model.Carriages)
+{
+    <div class="container">
+        <div class="card border-danger">
+            <button class="btn btn-danger" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-@carriage.Id"
+                    data-target="#collapse-@carriage.Id">
+                Carriage №@carriage.Id</button>
+            <div class="collapse" id="collapse-@carriage.Id">
+                <table>
+                    @foreach (var seat in carriage.Seats)
+                    {
+                        <tr>
+                            <td>Seat №@seat.NumberInCarriage</td>
+                            <td>Type: @carriage.Type.ToString().ToLower()</td>
+                            <td>Price: @carriage.Price</td>
+                            <td>
+                                <form method="post" asp-action="Buy" asp-controller="BuyTicket" id=@seat.SeatId>
+                                    <input type="hidden" name="tripId" value="@Model.TripId"/>
+                                    <input type="hidden" name="seatId" value="@seat.SeatId"/>
+                                    <input type="hidden" name="userEmail" value="@User.Identity.Name"/>
+                                    <input type="submit" value="Buy ticket" class="btn btn-secondary">
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+@Html.ActionLink("Back", "Index", "Dashboard", null, new {@class = "btn btn-primary", style = "margin:30px"})

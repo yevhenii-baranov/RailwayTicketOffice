@@ -19,7 +19,9 @@ namespace RailwayTicketOffice.Entity
 
         [Required] public decimal Price { get; set; }
 
-        [Required] public DateTime Date { get; set; }
+        [Required] public DateTime TripDate { get; set; }
+        
+        [Required] public DateTime PurchaseDate { get; set; }
     }
     
     public enum TicketType: int

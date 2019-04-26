@@ -14,7 +14,7 @@ namespace RailwayTicketOffice.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
             modelBuilder.Entity("RailwayTicketOffice.Entity.Carriage", b =>
                 {
@@ -37,11 +37,6 @@ namespace RailwayTicketOffice.Migrations
 
                     b.Property<int>("NumberInCarriage");
 
-                    b.Property<short>("Ordered")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue((short)0);
-
                     b.HasKey("ID");
 
                     b.HasIndex("CarriageID");
@@ -58,17 +53,21 @@ namespace RailwayTicketOffice.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<int>("SeatID");
+                    b.Property<DateTime>("PurchaseDate");
+
+                    b.Property<int>("SeatId");
 
                     b.Property<int>("TicketType");
 
                     b.Property<int>("TrainID");
 
+                    b.Property<DateTime>("TripDate");
+
                     b.HasKey("ID");
 
                     b.HasIndex("PassengerID");
 
-                    b.HasIndex("SeatID");
+                    b.HasIndex("SeatId");
 
                     b.HasIndex("TrainID");
 
@@ -146,19 +145,17 @@ namespace RailwayTicketOffice.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("FirstName")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
-                    b.Property<string>("LastName")
-                        .IsRequired();
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<string>("PassportData");
 
                     b.Property<string>("Password");
 
                     b.Property<int>("UserRole");
-
-                    b.Property<string>("Username");
 
                     b.HasKey("ID");
 
@@ -185,7 +182,7 @@ namespace RailwayTicketOffice.Migrations
 
                     b.HasOne("RailwayTicketOffice.Entity.CarriageSeat", "Seat")
                         .WithMany()
-                        .HasForeignKey("SeatID")
+                        .HasForeignKey("SeatId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("RailwayTicketOffice.Entity.Train", "Train")

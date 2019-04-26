@@ -9,7 +9,6 @@ namespace RailwayTicketOffice.Service
 {
     public class TrainFindingService
     {
-
         public List<Trip> FindTrips(TrainStation departureStation, TrainStation arrivalStation, DateTime? departureDate)
         {
             List<Trip> trips = null;
@@ -19,47 +18,57 @@ namespace RailwayTicketOffice.Service
                 {
                     trips = context.Trips.Where(
                         trip => trip.TripDate.Equals(departureDate)
-                        && trip.Train.DepartureStation.Equals(departureStation)
-                        && trip.Train.ArrivalStation.Equals(arrivalStation)).ToList();
+                                && trip.Train.DepartureStation.Equals(departureStation)
+                                && trip.Train.ArrivalStation.Equals(arrivalStation)).ToList();
                 }
 
                 else if (departureDate != null)
                 {
                     trips = RecursiveLoadTrip(
                         context.Trips.Where(
-                           trip => trip.TripDate.Equals(departureDate)));
+                            trip => trip.TripDate.Equals(departureDate)));
                 }
                 else if (departureStation != null && arrivalStation != null)
                 {
                     trips = RecursiveLoadTrip(
-                                context.Trips.Where(
+                        context.Trips.Where(
                             trip => trip.Train.DepartureStation.Equals(departureStation)
-                            && trip.Train.ArrivalStation.Equals(arrivalStation)
-                            ));
+                                    && trip.Train.ArrivalStation.Equals(arrivalStation)
+                        ));
                 }
                 else
                 {
                     trips = RecursiveLoadTrip(context.Trips);
                 }
             }
+
             return trips;
         }
 
         public void BuyTicket(Trip trip, CarriageSeat currentSeat, User currentUser)
         {
-            decimal price = 100 + Convert.ToInt32(currentSeat.Carriage.CarriageType) * 25;
+            var price = GetPrice(currentSeat.Carriage.CarriageType);
             using (var context = new MySqlDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.ID == currentUser.ID);
-                Ticket ticket = new Ticket { Passenger = user,
+                Ticket ticket = new Ticket
+                {
+                    Passenger = user,
                     Price = price,
                     SeatId = currentSeat.ID,
                     TicketType = TicketType.Full,
                     Train = trip.Train,
-                    Date = trip.TripDate};
+                    TripDate = trip.TripDate,
+                    PurchaseDate = DateTime.Now
+                };
                 context.Tickets.Update(ticket);
                 context.SaveChanges();
             }
+        }
+
+        public static decimal GetPrice(CarriageType carriageType)
+        {
+            return 100 + Convert.ToInt32(carriageType) * 25;
         }
 
         public List<CarriageSeat> GetAvailableSeats(Carriage carriage, Trip trip)
@@ -67,7 +76,7 @@ namespace RailwayTicketOffice.Service
             using (var context = new MySqlDbContext())
             {
                 List<CarriageSeat> seats = context.Seats.Include(seat => seat.Carriage)
-                    .Where(seat => seat.Carriage == carriage).ToList();
+                    .Where(seat => seat.Carriage.Equals(carriage)).ToList();
 
                 var tickets = from t in context.Tickets where t.Seat.Carriage.Equals(carriage) select t;
 
@@ -103,13 +112,26 @@ namespace RailwayTicketOffice.Service
             {
                 var tc = context.TrainCarriages.Where(trainCarriage => trainCarriage.TrainID == train.ID)
                     .Include(trainCarriage => trainCarriage.Carriage);
-                List<Carriage> carriages = new List<Carriage>();
 
-                foreach (var tcar in tc)
-                {
-                    carriages.Add(tcar.Carriage);
-                }
-                return carriages;
+                return tc.Select(tcar => tcar.Carriage).ToList();
+            }
+        }
+
+        public Trip GetTripById(int tripId)
+        {
+            using (var context = new MySqlDbContext())
+            {
+                var trip = context.Trips.Include(t => t.Train).FirstOrDefault(t => t.ID == tripId);
+                return trip;
+            }
+        }
+
+        public CarriageSeat GetSeatById(int seatId)
+        {
+            using (var context = new MySqlDbContext())
+            {
+                return context.Seats.Include(seat => seat.Carriage)
+                    .FirstOrDefault(seat => seat.ID == seatId);
             }
         }
     }

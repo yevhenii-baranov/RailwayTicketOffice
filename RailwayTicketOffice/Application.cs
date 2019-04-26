@@ -1,57 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RailwayTicketOffice.Database;
-using RailwayTicketOffice.Entity;
-using RailwayTicketOffice.Service;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace RailwayTicketOffice
 {
-    class TicketOfficeApplication
+    public static class EntryPoint
     {
-        private static TicketOfficeApplication application = null;
-
-        private readonly TrainFindingService trainFindingService = new TrainFindingService();
-        private readonly TicketService ticketService = new TicketService();
-        private readonly UserManagementService userManagementService = new UserManagementService();
-
-        public User CurrentUser { get; set; }
-
-        private TicketOfficeApplication()
+        public static void Main(string[] args)
         {
-        }
-        public TicketService GetTicketService()
-        {
-            return ticketService;
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        private readonly AuthenticationService authService = new AuthenticationService();
-
-        public UserManagementService GetUserManagementService()
-        {
-            return userManagementService;
-        }
-
-        public AuthenticationService GetAuthenticationService()
-        {
-            return authService;
-        }
-
-        public TrainFindingService GetTrainFindingService()
-        {
-            return trainFindingService;
-        }
-
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public static TicketOfficeApplication GetInstance()
-        {
-            if(application == null)
-            {
-                application = new TicketOfficeApplication();
-            }
-            return application;
-        }
+        private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
     }
 }

@@ -1,0 +1,14 @@
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Management panel</h2>
+
+<p>Welcome, administrator!
+
+What do you want to edit?</p>
+
+@Html.ActionLink("Trips", "Index", "Trips",  null, new {@class="btn btn-primary"})
+@Html.ActionLink("Train stations", "Index", "TrainStations", null, new {@class="btn btn-primary"})
+@Html.ActionLink("Users", "Index", "Users", null, new {@class="btn btn-primary"})

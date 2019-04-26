@@ -7,8 +7,6 @@ namespace RailwayTicketOffice.Entity
     public class CarriageSeat : Entity
     {
         [Required] public int NumberInCarriage { get; set; }
-
-        [Required] public bool Ordered { get; set; }
         
         [Required] public Carriage Carriage { get; set; }
 
